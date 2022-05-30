@@ -14,15 +14,17 @@ import PanModal
 class MealDetailViewController: UIViewController {
     
     private lazy var dateLabel = UILabel().then {
-        $0.text = "22.05.27(금)"
+        $0.text = getDateString(date: Date.now, dateFormat: "yy.MM.dd(E)")
         $0.textAlignment = .center
         $0.font = .systemFont(ofSize: 24.0, weight: .bold)
     }
     private lazy var nextButton = UIButton().then {
         $0.setImage(Icon.arrowRight.image, for: .normal)
+        $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     private lazy var prevButton = UIButton().then {
         $0.setImage(Icon.arrowLeft.image, for: .normal)
+        $0.addTarget(self, action: #selector(didTapPrevButton), for: .touchUpInside)
     }
     private lazy var mealInfoLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 16.0, weight: .semibold)
@@ -30,12 +32,12 @@ class MealDetailViewController: UIViewController {
     }
     
     private let schoolInfo: SchoolInfo
+    private var now = Date.now
     
     init(schoolInfo: SchoolInfo) {
         self.schoolInfo = schoolInfo
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -45,13 +47,27 @@ class MealDetailViewController: UIViewController {
         setupNavigationBar()
         attribute()
         layout()
-        
-        fetchData(schoolInfo: schoolInfo, dateString: "20220527")
+        nowDateFetchData()
     }
 }
 
 // MARK: - Logics
 private extension MealDetailViewController {
+    func nextOrPrevDateString(value: Int) -> String {
+        let newDate = Calendar.current.date(byAdding: .day, value: value, to: now) ?? now
+        now = newDate
+        return getDateString(date: newDate, dateFormat: "yyyyMMdd")
+    }
+    func nowDateFetchData() {
+        let nowDateString = getDateString(date: now, dateFormat: "yyyyMMdd")
+        fetchData(schoolInfo: schoolInfo, dateString: nowDateString)
+    }
+    func getDateString(date: Date, dateFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.string(from: date)
+    }
     func startActivity() {
         view.makeToastActivity(.center)
     }
@@ -71,7 +87,10 @@ private extension MealDetailViewController {
                 }
             case .failure(_):
                 print("ERROR")
-                self.stopActivity()
+                DispatchQueue.main.async {
+                    self.mealInfoLabel.text = "급식 정보가 없습니다."
+                    self.stopActivity()
+                }
             }
         }
     }
@@ -79,6 +98,14 @@ private extension MealDetailViewController {
 
 // MARK: - @objc Methods
 private extension MealDetailViewController {
+    @objc func didTapNextButton() {
+        fetchData(schoolInfo: schoolInfo, dateString: nextOrPrevDateString(value: 1))
+        dateLabel.text = getDateString(date: now, dateFormat: "yy.MM.dd(E)")
+    }
+    @objc func didTapPrevButton() {
+        fetchData(schoolInfo: schoolInfo, dateString: nextOrPrevDateString(value: -1))
+        dateLabel.text = getDateString(date: now, dateFormat: "yy.MM.dd(E)")
+    }
     @objc func didTapInfoButton() {
         let allergyInfoVC = AllergyInfoViewController()
         presentPanModal(allergyInfoVC, sourceView: nil, sourceRect: .zero)
