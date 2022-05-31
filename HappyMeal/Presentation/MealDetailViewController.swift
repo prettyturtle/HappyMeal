@@ -82,7 +82,7 @@ private extension MealDetailViewController {
             case .success(let mealInfo):
                 print(mealInfo.mealInfo)
                 DispatchQueue.main.async {
-                    self.mealInfoLabel.text = mealInfo.mealInfo
+                    self.mealInfoLabel.text = mealInfo.mealInfo.trimmed.translateHtml
                     self.stopActivity()
                 }
             case .failure(_):
