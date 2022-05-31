@@ -10,6 +10,7 @@ import SnapKit
 import Then
 import Toast
 import PanModal
+import Floaty
 
 class MealDetailViewController: UIViewController {
     
@@ -29,6 +30,12 @@ class MealDetailViewController: UIViewController {
     private lazy var mealInfoLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 16.0, weight: .semibold)
         $0.numberOfLines = 0
+    }
+    private lazy var floatyButton = Floaty().then {
+        $0.buttonColor = .systemBlue
+        $0.plusColor = .white
+        $0.itemImageColor = .darkGray
+        $0.addItem(icon: Icon.share.image, handler: didTapShareButton(item:))
     }
     
     private let schoolInfo: SchoolInfo
@@ -53,6 +60,14 @@ class MealDetailViewController: UIViewController {
 
 // MARK: - Logics
 private extension MealDetailViewController {
+    func didTapShareButton(item: FloatyItem) {
+        view.makeToastActivity(.center)
+        let shareObject: [Any] = ["\(schoolInfo.schoolName) 급식 정보", view.asImage()]
+        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
+        floatyButton.close()
+        present(activityViewController, animated: true)
+        view.hideToastActivity()
+    }
     func nextOrPrevDateString(value: Int) -> String {
         let newDate = Calendar.current.date(byAdding: .day, value: value, to: now) ?? now
         now = newDate
@@ -133,25 +148,28 @@ private extension MealDetailViewController {
             prevButton,
             dateLabel,
             nextButton,
-            mealInfoLabel
+            mealInfoLabel,
+            floatyButton
         ].forEach { view.addSubview($0) }
         
+        let commonSpacing: CGFloat = 16.0
+        
         prevButton.snp.makeConstraints {
-            $0.leading.top.equalTo(view.safeAreaLayoutGuide).inset(16.0)
+            $0.leading.top.equalTo(view.safeAreaLayoutGuide).inset(commonSpacing)
         }
         dateLabel.snp.makeConstraints {
             $0.leading.equalTo(prevButton.snp.trailing)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(16.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(commonSpacing)
             $0.trailing.equalTo(nextButton.snp.leading)
             $0.centerX.equalToSuperview()
         }
         nextButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(view.safeAreaLayoutGuide).inset(16.0)
+            $0.top.trailing.equalTo(view.safeAreaLayoutGuide).inset(commonSpacing)
         }
         mealInfoLabel.snp.makeConstraints {
-            $0.top.equalTo(dateLabel.snp.bottom).offset(16.0)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16.0)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16.0)
+            $0.top.equalTo(dateLabel.snp.bottom).offset(commonSpacing)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(commonSpacing)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(commonSpacing)
         }
         dateLabel.snp.contentHuggingVerticalPriority = 1000.0
         mealInfoLabel.snp.contentHuggingVerticalPriority = 999.0

@@ -12,6 +12,7 @@ enum Icon {
     case info
     case arrowRight
     case arrowLeft
+    case share
     
     var image: UIImage? {
         switch self {
@@ -19,6 +20,7 @@ enum Icon {
         case .info: return UIImage(systemName: "info.circle")
         case .arrowRight: return UIImage(systemName: "arrow.right")
         case .arrowLeft: return UIImage(systemName: "arrow.left")
+        case .share: return UIImage(systemName: "square.and.arrow.up")
         }
     }
 }
