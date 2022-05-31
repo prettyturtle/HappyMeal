@@ -35,6 +35,7 @@ class MealDetailViewController: UIViewController {
         $0.buttonColor = .systemBlue
         $0.plusColor = .white
         $0.itemImageColor = .darkGray
+        $0.addItem(icon: Icon.house.image, handler: didTapMySchoolButton(item:))
         $0.addItem(icon: Icon.share.image, handler: didTapShareButton(item:))
     }
     
@@ -60,6 +61,16 @@ class MealDetailViewController: UIViewController {
 
 // MARK: - Logics
 private extension MealDetailViewController {
+    func didTapMySchoolButton(item: FloatyItem) {
+        UserDefaultsManager.shared.setMySchool(schoolInfo: schoolInfo) { result in
+            switch result {
+            case .success(_):
+                self.view.makeToast("마이 스쿨 등록 성공!")
+            case .failure(let error):
+                self.view.makeToast(error.localizedDescription)
+            }
+        }
+    }
     func didTapShareButton(item: FloatyItem) {
         view.makeToastActivity(.center)
         let shareObject: [Any] = ["\(schoolInfo.schoolName) 급식 정보", view.asImage()]
@@ -95,13 +106,11 @@ private extension MealDetailViewController {
             guard let self = self else { return }
             switch result {
             case .success(let mealInfo):
-                print(mealInfo.mealInfo)
                 DispatchQueue.main.async {
                     self.mealInfoLabel.text = mealInfo.mealInfo.trimmed.translateHtml
                     self.stopActivity()
                 }
             case .failure(_):
-                print("ERROR")
                 DispatchQueue.main.async {
                     self.mealInfoLabel.text = "급식 정보가 없습니다."
                     self.stopActivity()

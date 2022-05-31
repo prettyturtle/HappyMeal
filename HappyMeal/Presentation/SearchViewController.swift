@@ -36,13 +36,6 @@ class SearchViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(
-            """
-            \(schools[indexPath.row].schoolName)
-            \(schools[indexPath.row].officeCode)
-            \(schools[indexPath.row].schoolCode)
-            """
-        )
         let school = schools[indexPath.row]
         let schoolInfo = SchoolInfo(schoolCode: school.schoolCode,
                                     officeCode: school.officeCode,
@@ -103,6 +96,10 @@ private extension SearchViewController {
 
 // MARK: - @objc Methods
 private extension SearchViewController {
+    @objc func didTapMySchoolButton() {
+        guard let schoolInfo = UserDefaultsManager.shared.getMySchool() else { return }
+        navigationController?.pushViewController(MealDetailViewController(schoolInfo: schoolInfo), animated: true)
+    }
 }
 
 // MARK: - UI Methods
@@ -111,6 +108,14 @@ private extension SearchViewController {
         navigationItem.title = "학교 검색"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        let rightBarButton = UIBarButtonItem(
+            image: Icon.house.image,
+            style: .plain,
+            target: self,
+            action: #selector(didTapMySchoolButton)
+        )
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     func attribute() {
         view.backgroundColor = .systemBackground
