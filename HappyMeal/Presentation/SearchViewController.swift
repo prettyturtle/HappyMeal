@@ -64,6 +64,10 @@ extension SearchViewController: UISearchBarDelegate {
             fetchData(schoolName: searchBar.text!)
         }
     }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        schools = []
+        schoolTableView.reloadData()
+    }
 }
 
 // MARK: - Logics

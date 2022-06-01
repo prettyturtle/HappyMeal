@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "floaty",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kciter/Floaty.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f8f6cf9970a3d92e98fcc2cf123b1bdef15e8778"
+      }
+    },
+    {
       "identity" : "panmodal",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/slackhq/PanModal.git",

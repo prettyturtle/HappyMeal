@@ -10,6 +10,10 @@
 		6B59560E2844AE54004821F1 /* SchoolInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59560D2844AE54004821F1 /* SchoolInfo.swift */; };
 		6B5956112844B156004821F1 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 6B5956102844B156004821F1 /* PanModal */; };
 		6B5956132844B1C2004821F1 /* AllergyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5956122844B1C2004821F1 /* AllergyInfoViewController.swift */; };
+		6B59561A284643BA004821F1 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B595619284643BA004821F1 /* String+.swift */; };
+		6B59561F2846514C004821F1 /* Floaty in Frameworks */ = {isa = PBXBuildFile; productRef = 6B59561E2846514C004821F1 /* Floaty */; };
+		6B595621284659B1004821F1 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B595620284659B1004821F1 /* UIView+.swift */; };
+		6B59562328466AB4004821F1 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B59562228466AB4004821F1 /* UserDefaultsManager.swift */; };
 		6B60EBBB28447C4600421FA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60EBBA28447C4600421FA4 /* AppDelegate.swift */; };
 		6B60EBBD28447C4600421FA4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60EBBC28447C4600421FA4 /* SceneDelegate.swift */; };
 		6B60EBBF28447C4600421FA4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B60EBBE28447C4600421FA4 /* SearchViewController.swift */; };
@@ -30,6 +34,10 @@
 /* Begin PBXFileReference section */
 		6B59560D2844AE54004821F1 /* SchoolInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolInfo.swift; sourceTree = "<group>"; };
 		6B5956122844B1C2004821F1 /* AllergyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergyInfoViewController.swift; sourceTree = "<group>"; };
+		6B59561828462ACC004821F1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6B595619284643BA004821F1 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		6B595620284659B1004821F1 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		6B59562228466AB4004821F1 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		6B60EBB728447C4600421FA4 /* HappyMeal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyMeal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B60EBBA28447C4600421FA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B60EBBC28447C4600421FA4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B60EBDD28449D1E00421FA4 /* Toast in Frameworks */,
+				6B59561F2846514C004821F1 /* Floaty in Frameworks */,
 				6B60EBDA2844807800421FA4 /* Alamofire in Frameworks */,
 				6B60EBD228447EF800421FA4 /* SnapKit in Frameworks */,
 				6B60EBD528447F1400421FA4 /* Then in Frameworks */,
@@ -98,9 +107,27 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		6B59561B28464B82004821F1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6B595619284643BA004821F1 /* String+.swift */,
+				6B595620284659B1004821F1 /* UIView+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6B59562428466B6D004821F1 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6B59562228466AB4004821F1 /* UserDefaultsManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		6B60EBAE28447C4600421FA4 = {
 			isa = PBXGroup;
 			children = (
+				6B59561828462ACC004821F1 /* README.md */,
 				6B60EBB928447C4600421FA4 /* HappyMeal */,
 				6B60EBB828447C4600421FA4 /* Products */,
 			);
@@ -119,6 +146,8 @@
 			children = (
 				6B60EBBA28447C4600421FA4 /* AppDelegate.swift */,
 				6B60EBBC28447C4600421FA4 /* SceneDelegate.swift */,
+				6B59562428466B6D004821F1 /* Manager */,
+				6B59561B28464B82004821F1 /* Extension */,
 				6B5956162844BA6C004821F1 /* Presentation */,
 				6B5956152844BA66004821F1 /* Model */,
 				6B5956142844BA59004821F1 /* Network */,
@@ -152,6 +181,7 @@
 				6B60EBD92844807800421FA4 /* Alamofire */,
 				6B60EBDC28449D1E00421FA4 /* Toast */,
 				6B5956102844B156004821F1 /* PanModal */,
+				6B59561E2846514C004821F1 /* Floaty */,
 			);
 			productName = HappyMeal;
 			productReference = 6B60EBB728447C4600421FA4 /* HappyMeal.app */;
@@ -187,6 +217,7 @@
 				6B60EBD82844807800421FA4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6B60EBDB28449D1E00421FA4 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6B59560F2844B156004821F1 /* XCRemoteSwiftPackageReference "PanModal" */,
+				6B59561D2846514C004821F1 /* XCRemoteSwiftPackageReference "Floaty" */,
 			);
 			productRefGroup = 6B60EBB828447C4600421FA4 /* Products */;
 			projectDirPath = "";
@@ -216,6 +247,7 @@
 			files = (
 				6B60EBD728447FCE00421FA4 /* Network_SchoolInfoFetcher.swift in Sources */,
 				6B59560E2844AE54004821F1 /* SchoolInfo.swift in Sources */,
+				6B59562328466AB4004821F1 /* UserDefaultsManager.swift in Sources */,
 				6B60EBBF28447C4600421FA4 /* SearchViewController.swift in Sources */,
 				6B5956132844B1C2004821F1 /* AllergyInfoViewController.swift in Sources */,
 				6B60EBE12844A29C00421FA4 /* SchoolInfoResponse.swift in Sources */,
@@ -224,6 +256,8 @@
 				6B60EBCF28447DC300421FA4 /* Icon.swift in Sources */,
 				6B60EBE32844A3C700421FA4 /* Network_MealFetcher.swift in Sources */,
 				6B60EBBB28447C4600421FA4 /* AppDelegate.swift in Sources */,
+				6B595621284659B1004821F1 /* UIView+.swift in Sources */,
+				6B59561A284643BA004821F1 /* String+.swift in Sources */,
 				6B60EBBD28447C4600421FA4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +476,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		6B59561D2846514C004821F1 /* XCRemoteSwiftPackageReference "Floaty" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kciter/Floaty.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6B60EBD028447EF800421FA4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -481,6 +523,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6B59560F2844B156004821F1 /* XCRemoteSwiftPackageReference "PanModal" */;
 			productName = PanModal;
+		};
+		6B59561E2846514C004821F1 /* Floaty */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B59561D2846514C004821F1 /* XCRemoteSwiftPackageReference "Floaty" */;
+			productName = Floaty;
 		};
 		6B60EBD128447EF800421FA4 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

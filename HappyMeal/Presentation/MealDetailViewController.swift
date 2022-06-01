@@ -72,12 +72,10 @@ private extension MealDetailViewController {
         }
     }
     func didTapShareButton(item: FloatyItem) {
-        view.makeToastActivity(.center)
         let shareObject: [Any] = ["\(schoolInfo.schoolName) 급식 정보", view.asImage()]
         let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
         floatyButton.close()
         present(activityViewController, animated: true)
-        view.hideToastActivity()
     }
     func nextOrPrevDateString(value: Int) -> String {
         let newDate = Calendar.current.date(byAdding: .day, value: value, to: now) ?? now
