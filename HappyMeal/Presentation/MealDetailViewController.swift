@@ -30,6 +30,13 @@ class MealDetailViewController: UIViewController {
     private lazy var mealInfoLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 16.0, weight: .semibold)
         $0.numberOfLines = 0
+        $0.isUserInteractionEnabled = true
+        let leftSwipegesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeMealInfo(_:)))
+        let rightSwipegesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeMealInfo(_:)))
+        leftSwipegesture.direction = .left
+        rightSwipegesture.direction = .right
+        $0.addGestureRecognizer(leftSwipegesture)
+        $0.addGestureRecognizer(rightSwipegesture)
     }
     private lazy var floatyButton = Floaty().then {
         $0.buttonColor = .systemBlue
@@ -120,6 +127,16 @@ private extension MealDetailViewController {
 
 // MARK: - @objc Methods
 private extension MealDetailViewController {
+    @objc func swipeMealInfo(_ recognizer: UISwipeGestureRecognizer) {
+        switch recognizer.direction {
+        case .left:
+            didTapNextButton()
+        case .right:
+            didTapPrevButton()
+        default:
+            break
+        }
+    }
     @objc func didTapNextButton() {
         fetchData(schoolInfo: schoolInfo, dateString: nextOrPrevDateString(value: 1))
         dateLabel.text = getDateString(date: now, dateFormat: "yy.MM.dd(E)")
