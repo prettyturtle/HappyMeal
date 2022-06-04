@@ -60,8 +60,8 @@ class MealDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        attribute()
-        layout()
+        setupAttribute()
+        setupLayout()
         nowDateFetchData()
     }
 }
@@ -164,10 +164,10 @@ private extension MealDetailViewController {
         navigationItem.rightBarButtonItem = rightBarButton
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
-    func attribute() {
+    func setupAttribute() {
         view.backgroundColor = .systemBackground
     }
-    func layout() {
+    func setupLayout() {
         [
             prevButton,
             dateLabel,

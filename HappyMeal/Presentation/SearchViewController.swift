@@ -28,8 +28,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        attribute()
-        layout()
+        setupAttribute()
+        setupLayout()
     }
 }
 
@@ -121,10 +121,10 @@ private extension SearchViewController {
         )
         navigationItem.rightBarButtonItem = rightBarButton
     }
-    func attribute() {
+    func setupAttribute() {
         view.backgroundColor = .systemBackground
     }
-    func layout() {
+    func setupLayout() {
         [schoolTableView].forEach { view.addSubview($0) }
         schoolTableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)

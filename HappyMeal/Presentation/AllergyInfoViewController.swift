@@ -20,8 +20,8 @@ class AllergyInfoViewController: UIViewController, PanModalPresentable {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
-        layout()
+        setupAttribute()
+        setupLayout()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -31,10 +31,10 @@ class AllergyInfoViewController: UIViewController, PanModalPresentable {
 }
 
 private extension AllergyInfoViewController {
-    func attribute() {
+    func setupAttribute() {
         view.backgroundColor = .systemBackground
     }
-    func layout() {
+    func setupLayout() {
         view.addSubview(allergyInfoLabel)
         allergyInfoLabel.snp.makeConstraints {
             $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide).inset(16.0)
