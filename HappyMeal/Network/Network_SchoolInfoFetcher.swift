@@ -29,7 +29,9 @@ struct SchoolInfoFetcher {
         }
     }
     
-    func fetchAllSchool(completion: @escaping (Result<[SchoolInfoResponse.SchoolInfo.Row], Error>) -> Void) {
+    func fetchAllSchool(
+        completion: @escaping (Result<[SchoolInfoResponse.SchoolInfo.Row], Error>
+        ) -> Void) {
         var params = [String: String]()
         _ = Parameter.allCases.map {
             params[$0.title] = $0.value

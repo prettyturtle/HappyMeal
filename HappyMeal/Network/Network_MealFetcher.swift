@@ -30,8 +30,9 @@ struct MealFetcher {
         }
     }
     
-    func fetchMeal(completion: @escaping (Result<MealInfoResponse.MealServiceDietInfo.Row, Error>) -> Void) {
-        
+    func fetchMeal(
+        completion: @escaping (Result<MealInfoResponse.MealServiceDietInfo.Row, Error>) -> Void
+    ) {
         var params = [String: String]()
         
         _ = Parameter.allCases.map { params[$0.title] = $0.value }
@@ -48,7 +49,8 @@ struct MealFetcher {
             .responseDecodable(of: MealInfoResponse.self) { res in
                 switch res.result {
                 case .success(let mealInfoResponse):
-                    guard let row = mealInfoResponse.mealServiceDietInfo.compactMap({ $0.row }).first?.first else { return }
+                    guard let row = mealInfoResponse.mealServiceDietInfo
+                        .compactMap({ $0.row }).first?.first else { return }
                     completion(.success(row))
                 case .failure(let error):
                     completion(.failure(error))

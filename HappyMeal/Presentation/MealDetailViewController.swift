@@ -31,8 +31,14 @@ class MealDetailViewController: UIViewController {
         $0.font = .systemFont(ofSize: 16.0, weight: .semibold)
         $0.numberOfLines = 0
         $0.isUserInteractionEnabled = true
-        let leftSwipegesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeMealInfo(_:)))
-        let rightSwipegesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeMealInfo(_:)))
+        let leftSwipegesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeMealInfo(_:))
+        )
+        let rightSwipegesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(swipeMealInfo(_:))
+        )
         leftSwipegesture.direction = .left
         rightSwipegesture.direction = .right
         $0.addGestureRecognizer(leftSwipegesture)
@@ -80,7 +86,10 @@ private extension MealDetailViewController {
     }
     func didTapShareButton(item: FloatyItem) {
         let shareObject: [Any] = ["\(schoolInfo.schoolName) 급식 정보", view.asImage()]
-        let activityViewController = UIActivityViewController(activityItems: shareObject, applicationActivities: nil)
+        let activityViewController = UIActivityViewController(
+            activityItems: shareObject,
+            applicationActivities: nil
+        )
         floatyButton.close()
         present(activityViewController, animated: true)
     }
@@ -107,7 +116,10 @@ private extension MealDetailViewController {
     }
     func fetchData(schoolInfo: SchoolInfo, dateString: String) {
         startActivity()
-        MealFetcher(schoolInfo: schoolInfo, dateString: dateString).fetchMeal { [weak self] result in
+        MealFetcher(
+            schoolInfo: schoolInfo,
+            dateString: dateString
+        ).fetchMeal { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let mealInfo):

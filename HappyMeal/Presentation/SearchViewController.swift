@@ -37,9 +37,11 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let school = schools[indexPath.row]
-        let schoolInfo = SchoolInfo(schoolCode: school.schoolCode,
-                                    officeCode: school.officeCode,
-                                    schoolName: school.schoolName)
+        let schoolInfo = SchoolInfo(
+            schoolCode: school.schoolCode,
+            officeCode: school.officeCode,
+            schoolName: school.schoolName
+        )
         let mealDetailVC = MealDetailViewController(schoolInfo: schoolInfo)
         navigationController?.pushViewController(mealDetailVC, animated: true)
     }
@@ -47,10 +49,16 @@ extension SearchViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension SearchViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         return schools.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = "\(schools[indexPath.row].schoolName)"
         return cell
@@ -102,7 +110,10 @@ private extension SearchViewController {
 private extension SearchViewController {
     @objc func didTapMySchoolButton() {
         guard let schoolInfo = UserDefaultsManager.shared.getMySchool() else { return }
-        navigationController?.pushViewController(MealDetailViewController(schoolInfo: schoolInfo), animated: true)
+        navigationController?.pushViewController(
+            MealDetailViewController(schoolInfo: schoolInfo),
+            animated: true
+        )
     }
 }
 
