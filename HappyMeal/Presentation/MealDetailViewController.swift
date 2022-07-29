@@ -75,13 +75,10 @@ class MealDetailViewController: UIViewController {
 // MARK: - Logics
 private extension MealDetailViewController {
     func didTapMySchoolButton(item: FloatyItem) {
-        UserDefaultsManager.shared.setMySchool(schoolInfo: schoolInfo) { result in
-            switch result {
-            case .success(_):
-                self.view.makeToast("마이 스쿨 등록 성공!")
-            case .failure(let error):
-                self.view.makeToast(error.localizedDescription)
-            }
+        if UserDefaultsManager.shared.setMySchool(schoolInfo: schoolInfo) {
+            self.view.makeToast("마이 스쿨 등록 성공!")
+        } else {
+            self.view.makeToast("마이 스쿨 등록 실패ㅠ")
         }
     }
     func didTapShareButton(item: FloatyItem) {

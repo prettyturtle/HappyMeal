@@ -12,20 +12,14 @@ struct UserDefaultsManager {
     private let standard = UserDefaults.standard
     static let shared = UserDefaultsManager()
     
-    func setMySchool(
-        schoolInfo: SchoolInfo,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
+    func setMySchool(schoolInfo: SchoolInfo) -> Bool {
         do {
             let encodedData = try JSONEncoder().encode(schoolInfo)
             let jsonObject = try JSONSerialization.jsonObject(with: encodedData)
-            
             standard.setValue(jsonObject, forKey: root)
-            completion(.success(()))
-            return
+            return true
         } catch {
-            completion(.failure(error))
-            return
+            return false
         }
     }
     func checkMySchool() -> Bool {
