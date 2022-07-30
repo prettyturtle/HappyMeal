@@ -1,4 +1,4 @@
-# 전국 학교 급식 알림 앱
+# 전국 학교 급식 조회 앱
 
 ### API
 1. [학교 기본 정보](https://open.neis.go.kr/portal/data/service/selectServicePage.do?page=1&rows=10&sortColumn=&sortDirection=&infId=OPEN17020190531110010104913&infSeq=2)
