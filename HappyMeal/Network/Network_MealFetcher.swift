@@ -41,11 +41,7 @@ struct MealFetcher {
         params["MLSV_YMD"] = dateString
         
         AF
-            .request(
-                url,
-                method: .get,
-                parameters: params
-            )
+            .request(url, method: .get, parameters: params)
             .responseDecodable(of: MealInfoResponse.self) { res in
                 switch res.result {
                 case .success(let mealInfoResponse):
