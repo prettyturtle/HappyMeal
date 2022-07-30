@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct SchoolInfoResponse: Codable {
+struct SchoolInfoResponse: Decodable {
     let schoolInfo: [SchoolInfo]
     
-    struct SchoolInfo: Codable {
+    struct SchoolInfo: Decodable {
         let row: [Row]?
         
-        struct Row: Codable {
+        struct Row: Decodable {
             let officeCode: String
             let schoolCode: String
             let schoolName: String
