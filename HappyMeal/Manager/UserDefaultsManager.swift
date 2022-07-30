@@ -15,8 +15,7 @@ struct UserDefaultsManager {
     func setMySchool(schoolInfo: SchoolInfo) -> Bool {
         do {
             let encodedData = try JSONEncoder().encode(schoolInfo)
-            let jsonObject = try JSONSerialization.jsonObject(with: encodedData)
-            standard.setValue(jsonObject, forKey: root)
+            standard.set(encodedData, forKey: root)
             return true
         } catch {
             return false
@@ -27,10 +26,9 @@ struct UserDefaultsManager {
         return (data != nil)
     }
     func getMySchool() -> SchoolInfo? {
-        guard let value = standard.value(forKey: root) else { return nil }
+        guard let data = standard.value(forKey: root) as? Data else { return nil }
         
         do {
-            let data = try JSONSerialization.data(withJSONObject: value)
             let schoolInfo = try JSONDecoder().decode(SchoolInfo.self, from: data)
             return schoolInfo
         } catch {
